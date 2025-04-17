@@ -8,6 +8,7 @@ module com.example.amalitechemployeemanagementsystem {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
+    requires annotations;
 
     opens com.example.amalitechemployeemanagementsystem to javafx.fxml;
     exports com.example.amalitechemployeemanagementsystem;
