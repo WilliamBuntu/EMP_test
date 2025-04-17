@@ -12,4 +12,6 @@ module com.example.amalitechemployeemanagementsystem {
 
     opens com.example.amalitechemployeemanagementsystem to javafx.fxml;
     exports com.example.amalitechemployeemanagementsystem;
+    exports com.example.amalitechemployeemanagementsystem.controllers;
+    opens com.example.amalitechemployeemanagementsystem.controllers to javafx.fxml;
 }
