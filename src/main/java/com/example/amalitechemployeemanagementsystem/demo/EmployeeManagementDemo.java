@@ -94,7 +94,7 @@ public class EmployeeManagementDemo {
         System.out.println("Employee count after removal: " + database.getEmployeeCount());
     }
 
-    // Helper method to display a list of employees.
+    // a method to display a list of employees.
 
     private static <T> void displayEmployees(List<Employee<T>> employees) {
         if (employees.isEmpty()) {
