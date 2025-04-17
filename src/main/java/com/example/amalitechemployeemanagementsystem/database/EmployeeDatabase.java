@@ -148,4 +148,64 @@ public class EmployeeDatabase <T> {
         return sortedEmployees;
     }
 
+    /**
+     * Gives a salary raise to employees with high performance ratings.
+     * @param minRating The minimum performance rating required for a raise
+     * @param percentageRaise The percentage salary raise
+     * @return The number of employees who received a raise
+     */
+    public int giveSalaryRaise(double minRating, double percentageRaise) {
+        int count = 0;
+        for (Employee<T> employee : employees.values()) {
+            if (employee.getPerformanceRating() >= minRating) {
+                double newSalary = employee.getSalary() * (1 + percentageRaise / 100);
+                employee.setSalary(newSalary);
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Retrieves the top N highest-paid employees.
+     * @param n The number of top employees to retrieve
+     * @return A list of the top N highest-paid employees
+     */
+    public List<Employee<T>> getTopPaidEmployees(int n) {
+        return employees.values().stream()
+                .sorted(new EmployeeSalaryComparator<>())
+                .limit(n)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Calculates the average salary of employees in a specific department.
+     * @param department The department to calculate the average salary for
+     * @return The average salary, or 0 if no employees in the department
+     */
+    public double getAverageSalaryByDepartment(String department) {
+        return employees.values().stream()
+                .filter(emp -> emp.getDepartment().equalsIgnoreCase(department))
+                .mapToDouble(Employee::getSalary)
+                .average()
+                .orElse(0);
+    }
+
+    /**
+     * Gets an employee by their ID.
+     * @param employeeId The ID of the employee to retrieve
+     * @return The employee, or null if no employee with the given ID exists
+     */
+    public Employee<T> getEmployee(T employeeId) {
+        return employees.get(employeeId);
+    }
+
+    /**
+     * Gets the number of employees.
+     * @return The number of employees
+     */
+    public int getEmployeeCount() {
+        return employees.size();
+    }
+
 }
