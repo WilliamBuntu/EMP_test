@@ -1,0 +1,186 @@
+/* --- General --- */
+.root { /* Targets the root BorderPane */
+    -fx-background-color: #f4f7f9; /* Light grey-blue background */
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-font-size: 13px;
+}
+
+/* --- Labels --- */
+.label {
+    -fx-text-fill: #333; /* Dark grey text */
+    -fx-font-size: 1em; /* Relative font size */
+}
+
+.section-label { /* Style for labels above controls */
+    -fx-font-weight: bold;
+    -fx-padding: 8px 0 0 0; /* Add some space above */
+    -fx-text-fill: #555;
+}
+
+
+/* --- Buttons --- */
+.button {
+    -fx-background-color: #6c757d; /* Default grey button */
+    -fx-text-fill: white;
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-padding: 8px 18px; /* Comfortable padding */
+    -fx-font-size: 1em;
+    -fx-cursor: hand; /* Indicate interactivity */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1); /* Subtle shadow */
+    -fx-transition: background-color 0.2s ease-in-out, -fx-effect 0.2s ease-in-out;
+}
+
+.button:hover {
+    -fx-background-color: derive(#6c757d, -10%); /* Darken slightly on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2); /* Enhance shadow */
+}
+
+.button:pressed {
+    -fx-background-color: derive(#6c757d, -20%); /* Darken more on press */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 0.5); /* Reduce shadow */
+}
+
+/* Primary action button (e.g., Add) */
+.primary-button {
+    -fx-background-color: #007bff; /* Blue */
+}
+.primary-button:hover {
+    -fx-background-color: derive(#007bff, -10%);
+}
+.primary-button:pressed {
+    -fx-background-color: derive(#007bff, -20%);
+}
+
+/* Danger action button (e.g., Remove) */
+.danger-button {
+    -fx-background-color: #dc3545; /* Red */
+}
+.danger-button:hover {
+    -fx-background-color: derive(#dc3545, -10%);
+}
+.danger-button:pressed {
+    -fx-background-color: derive(#dc3545, -20%);
+}
+
+/* Buttons in the right control panel */
+.control-button {
+     /* Inherits default button style, could add specific overrides here if needed */
+     /* e.g., -fx-min-width: 100px; */
+}
+
+
+/* --- Table View --- */
+.employee-table { /* Specific style class for the table */
+    -fx-border-color: #d1d8de; /* Light border */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-selection-bar: #007bff; /* Use primary color for selection */
+    -fx-selection-bar-non-focused: #a0cfff; /* Lighter blue when not focused */
+}
+
+/* Table Header */
+.employee-table .column-header-background {
+    -fx-background-color: #e9ecef; /* Light grey header */
+    -fx-background-radius: 5px 5px 0 0; /* Round top corners */
+    -fx-background-insets: 0;
+    -fx-padding: 8px 10px; /* Header padding */
+}
+
+.employee-table .column-header {
+     -fx-background-color: transparent; /* Ensure header background is used */
+     -fx-border-color: transparent #d1d8de transparent transparent; /* Vertical separators */
+     -fx-border-width: 0 1 0 0;
+}
+
+.employee-table .column-header .label {
+     -fx-text-fill: #333; /* Dark text for header */
+     -fx-font-weight: bold;
+     -fx-alignment: center-left;
+}
+
+/* Table Rows and Cells */
+.employee-table .table-cell {
+    -fx-padding: 10px; /* Cell padding */
+    -fx-border-color: transparent #e1e5e8 transparent transparent; /* Lighter vertical separators */
+    -fx-border-width: 0 1 0 0;
+    -fx-text-fill: #212529;
+}
+
+.employee-table .table-row-cell {
+    -fx-background-color: #ffffff; /* White background for rows */
+    -fx-background-insets: 0;
+    -fx-border-width: 0 0 1 0; /* Horizontal line below row */
+    -fx-border-color: #e1e5e8;
+}
+
+/* Zebra striping */
+.employee-table .table-row-cell:odd {
+    -fx-background-color: #f8f9fa; /* Slightly off-white for odd rows */
+}
+
+/* Hover effect on rows */
+.employee-table .table-row-cell:hover {
+    -fx-background-color: #e9f4ff; /* Light blue hover */
+}
+
+/* Selected row style */
+.employee-table .table-row-cell:selected {
+    -fx-background-color: -fx-selection-bar; /* Use defined selection color */
+}
+
+.employee-table .table-row-cell:selected .table-cell {
+    -fx-text-fill: white; /* White text on selected row */
+}
+
+
+/* --- Input Fields --- */
+.text-field, .combo-box {
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #ced4da;
+    -fx-font-size: 1em;
+    -fx-padding: 6px 10px;
+    -fx-prompt-text-fill: #6c757d; /* Style prompt text */
+    -fx-highlight-fill: #a0cfff; /* Text selection color */
+}
+
+.text-field:focused, .combo-box:focused {
+    -fx-border-color: #007bff; /* Blue border on focus */
+    -fx-effect: dropshadow(gaussian, rgba(0, 123, 255, 0.2), 5, 0, 0, 1); /* Subtle glow on focus */
+}
+
+/* --- Combo Box --- */
+.combo-box .list-cell { /* Style dropdown items */
+    -fx-padding: 5px 10px;
+}
+.combo-box .list-cell:filled:hover {
+     -fx-background-color: #e9f4ff; /* Match row hover */
+}
+.combo-box .list-cell:filled:selected {
+    -fx-background-color: -fx-selection-bar; /* Match selection color */
+    -fx-text-fill: white;
+}
+
+/* --- Slider --- */
+.slider .track {
+    -fx-background-color: #dee2e6;
+    -fx-background-radius: 5px;
+    -fx-padding: 4px; /* Give track some height */
+}
+
+.slider .thumb {
+    -fx-background-color: #007bff; /* Blue thumb */
+    -fx-background-radius: 50%; /* Circular thumb */
+    -fx-padding: 8px; /* Size of the thumb */
+}
+
+.slider:focused .thumb {
+     -fx-effect: dropshadow(gaussian, rgba(0, 123, 255, 0.3), 6, 0, 0, 2);
+}
+
+
+/* --- Separator --- */
+.separator .line {
+    -fx-border-color: #d1d8de; /* Match border colors */
+    -fx-border-width: 1 0 0 0;
+}
