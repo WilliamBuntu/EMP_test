@@ -208,4 +208,13 @@ public class EmployeeDatabase <T> {
         return employees.size();
     }
 
+    //displaying available departments
+    public Set<String> getAllDepartments() {
+        Set<String> departments = new HashSet<>();
+        for (Employee<T> employee : employees.values()) {
+            departments.add(employee.getDepartment());
+        }
+        return departments;
+    }
+
 }

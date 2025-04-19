@@ -1,16 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.amalitechemployeemanagementsystem.controllers.MainController">
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.amalitechemployeemanagementsystem.controllers.MainController"
+            stylesheets="@style.css" fx:id="rootPane">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets top="15" right="15" bottom="15" left="15"/>
     </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+    <center>
+        <TableView fx:id="employeeTableView" styleClass="employee-table"
+                   prefHeight="500.0" maxHeight="500.0"> <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="nameColumn" text="Name" prefWidth="150"/>
+                <TableColumn fx:id="deptColumn" text="Department" prefWidth="150"/>
+                <TableColumn fx:id="salaryColumn" text="Salary" prefWidth="100"/>
+                <TableColumn fx:id="ratingColumn" text="Rating"/>
+                <TableColumn fx:id="experienceColumn" text="Experience" prefWidth="100"/>
+                <TableColumn fx:id="activeColumn" text="Active" prefWidth="70"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <bottom>
+        <HBox spacing="15" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="10" right="0" bottom="0" left="0"/> </padding>
+            <Button fx:id="addButton" text="Add Employee" onAction="#showAddEmployeeDialog" styleClass="primary-button"/>
+            <Button fx:id="removeButton" text="Remove Employee" onAction="#removeSelectedEmployee" styleClass="danger-button"/>
+            <Button fx:id="updateButton" text="Update Employee" onAction="#showUpdateEmployeeDialog" />
+        </HBox>
+    </bottom>
+
+    <right>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="0" right="0" bottom="0" left="15"/>
+            </padding>
+            <Label text="Search by Name:" styleClass="section-label"/>
+            <TextField fx:id="searchNameField" promptText="Enter name" />
+            <Button text="Search" onAction="#searchByName" styleClass="control-button"/>
+
+            <Label text="Search by Department:" styleClass="section-label"/>
+            <TextField fx:id="searchDeptField" promptText="Enter department" />
+            <Button text="Search" onAction="#searchByDepartment" styleClass="control-button"/>
+
+            <Label text="Filter by Min Rating:" styleClass="section-label"/>
+            <Slider fx:id="ratingSlider" min="0" max="5" showTickLabels="true"
+                    showTickMarks="true" majorTickUnit="1" minorTickCount="0" snapToTicks="true" blockIncrement="1"/>
+            <Button text="Filter" onAction="#filterByRating" styleClass="control-button"/>
+
+            <Label text="Sort Employees:" styleClass="section-label"/>
+            <ComboBox fx:id="sortComboBox" promptText="Select Sort Criteria" maxWidth="Infinity"/> <Button text="Sort" onAction="#sortEmployees" styleClass="control-button"/>
+
+            <Separator/>
+
+            <Button text="Show All" onAction="#showAllEmployees" maxWidth="Infinity"/> </VBox>
+    </right>
+
+</BorderPane>

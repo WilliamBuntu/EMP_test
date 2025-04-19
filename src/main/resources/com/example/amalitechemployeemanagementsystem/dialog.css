@@ -1,0 +1,92 @@
+/* dialog.css */
+
+/* Style the root DialogPane */
+.dialog-pane {
+    -fx-background-color: linear-gradient(to bottom right, #e0f7fa, #b2ebf2); /* Light gradient background */
+    -fx-border-color: #00bcd4; /* Teal border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px; /* More rounded corners */
+    -fx-background-radius: 8px;
+}
+
+/* Style the header area */
+.dialog-pane .header-panel {
+    -fx-background-color: #00bcd4; /* Teal background for header */
+    -fx-padding: 15px;
+    -fx-border-radius: 8px 8px 0 0; /* Match top corners */
+}
+
+/* Style the header label */
+.dialog-pane .header-panel .label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white; /* White text for header */
+}
+
+/* Style the content area (the VBox in our FXML) */
+.dialog-pane .content {
+    -fx-padding: 25px; /* Increased padding */
+}
+
+/* Style Labels */
+.label {
+    -fx-font-weight: normal; /* Less bold */
+    -fx-text-fill: #00796b; /* Darker teal text */
+    -fx-font-size: 14px;
+}
+
+/* Style TextFields */
+.text-field {
+    -fx-background-color: #ffffff; /* White background */
+    -fx-border-color: #b2ebf2; /* Light teal border */
+    -fx-border-radius: 5px;
+    -fx-padding: 10px; /* More internal padding */
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #a7a7a7; /* Style prompt text */
+}
+
+/* Style TextFields when focused */
+.text-field:focused {
+    -fx-border-color: #00bcd4; /* Teal highlight */
+    -fx-effect: dropshadow(gaussian, rgba(0, 188, 212, 0.4), 8, 0, 0, 0); /* More prominent shadow */
+}
+
+/* Style CheckBox */
+.check-box {
+    -fx-padding: 10px 0 10px 0; /* Add vertical padding */
+}
+
+/* Style the button bar (OK/Cancel) */
+.dialog-pane .button-bar {
+     -fx-padding: 15px 25px; /* Padding for the button bar */
+     -fx-background-color: #b2ebf2; /* Light teal background */
+     -fx-border-radius: 0 0 8px 8px; /* Match bottom corners */
+}
+
+/* Style the OK Button */
+.dialog-pane .button-bar .button {
+    -fx-background-color: #009688; /* Primary teal green */
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 0);
+}
+
+/* Style the OK Button on hover */
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: #00796b; /* Darker teal green */
+}
+
+/* Style the Cancel Button */
+.dialog-pane .button-bar .button:cancel {
+     -fx-background-color: #e0e0e0; /* Light gray */
+     -fx-text-fill: #333333;
+     -fx-background-radius: 5px;
+     -fx-padding: 10px 20px;
+     -fx-font-size: 14px;
+     -fx-cursor: hand;
+}
+.dialog-pane .button-bar .button:cancel:hover {
+     -fx-background-color: #cccccc;
