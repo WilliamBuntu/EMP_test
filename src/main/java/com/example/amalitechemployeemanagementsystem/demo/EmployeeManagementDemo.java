@@ -5,6 +5,9 @@ import com.example.amalitechemployeemanagementsystem.model.Employee;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.Formatter;
+import java.util.ArrayList;
 
 /*
  * Demo class to show how to use the Employee Management System without the GUI.
@@ -78,9 +81,11 @@ public class EmployeeManagementDemo {
         // Using the iterator
         System.out.println("\n--- Using Iterator to display employees ---");
         Iterator<Employee<Integer>> iterator = database.getEmployeeIterator();
+        List<Employee<Integer>> employeeListFromIterator = new ArrayList<>();
         while (iterator.hasNext()) {
-            System.out.println(iterator.next());
+            employeeListFromIterator.add(iterator.next());
         }
+        displayEmployees(employeeListFromIterator);
 
         // Update an employee
         System.out.println("\n--- Updating employee with ID 3 ---");
@@ -92,18 +97,39 @@ public class EmployeeManagementDemo {
         System.out.println("\n--- Removing employee with ID 5 ---");
         database.removeEmployee(5);
         System.out.println("Employee count after removal: " + database.getEmployeeCount());
+
+        Set<String> uniqueDepartments = database.getAllDepartments(); // Assuming you have an instance of EmployeeDatabase
+
+        System.out.println("List of available departments  Departments:");
+        for (String department1 : uniqueDepartments) {
+            System.out.println("- " + department1);
+        }
     }
+    
 
-    // a method to display a list of employees.
-
+    // a method to display a list of employees in a table format.
     private static <T> void displayEmployees(List<Employee<T>> employees) {
         if (employees.isEmpty()) {
             System.out.println("No employees found.");
             return;
         }
 
+        // Print table header
+        System.out.printf("%-5s %-20s %-15s %-10s %-10s %-10s %-10s\n", 
+                          "ID", "Name", "Department", "Salary", "Rating", "Experience", "Active");
+        System.out.println("--------------------------------------------------------------------------------");
+
+        // Print each employee in a row
         for (Employee<T> employee : employees) {
-            System.out.println(employee);
+            System.out.printf("%-5s %-20s %-15s %-10.2f %-10.1f %-10d %-10s\n",
+                              employee.getemployeeId(),
+                              employee.getName(),
+                              employee.getDepartment(),
+                              employee.getSalary(),
+                              employee.getPerformanceRating(),
+                              employee.getYearsOfExperience(),
+                              employee.isActive() ? "Yes" : "No");
         }
     }
 }
+

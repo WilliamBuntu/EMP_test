@@ -17,7 +17,7 @@ public class EmployeeManagementSystemApp extends Application {
             Parent root = loader.load();
 
             // Set up the scene
-            Scene scene = new Scene(root, 300, 500);
+            Scene scene = new Scene(root, 1000, 600);
 
             // Configure the stage
             primaryStage.setTitle("Employee Management System");

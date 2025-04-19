@@ -6,34 +6,32 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.amalitechemployeemanagementsystem.controllers.MainController"
-            stylesheets="@style.css" fx:id="rootPane"> <padding>
-    <Insets top="15" right="15" bottom="15" left="15"/>
-</padding>
+            stylesheets="@style.css" fx:id="rootPane">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
 
     <center>
-        <TableView fx:id="employeeTableView" styleClass="employee-table">
-            <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-            </columnResizePolicy>
+        <TableView fx:id="employeeTableView" styleClass="employee-table"
+                   prefHeight="500.0" maxHeight="500.0"> <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
                 <TableColumn fx:id="nameColumn" text="Name" prefWidth="150"/>
                 <TableColumn fx:id="deptColumn" text="Department" prefWidth="150"/>
                 <TableColumn fx:id="salaryColumn" text="Salary" prefWidth="100"/>
-                <TableColumn fx:id="ratingColumn" text="Rating" prefWidth="80"/>
+                <TableColumn fx:id="ratingColumn" text="Rating"/>
                 <TableColumn fx:id="experienceColumn" text="Experience" prefWidth="100"/>
                 <TableColumn fx:id="activeColumn" text="Active" prefWidth="70"/>
             </columns>
-            <BorderPane.margin>
-                <Insets bottom="15"/> </BorderPane.margin>
         </TableView>
     </center>
 
     <bottom>
         <HBox spacing="15" alignment="CENTER_LEFT">
             <padding>
-                <Insets top="10" right="0" bottom="0" left="0"/>
-            </padding>
+                <Insets top="10" right="0" bottom="0" left="0"/> </padding>
             <Button fx:id="addButton" text="Add Employee" onAction="#showAddEmployeeDialog" styleClass="primary-button"/>
             <Button fx:id="removeButton" text="Remove Employee" onAction="#removeSelectedEmployee" styleClass="danger-button"/>
             <Button fx:id="updateButton" text="Update Employee" onAction="#showUpdateEmployeeDialog" />
@@ -41,7 +39,7 @@
     </bottom>
 
     <right>
-        <VBox spacing="12">
+        <VBox spacing="10">
             <padding>
                 <Insets top="0" right="0" bottom="0" left="15"/>
             </padding>
