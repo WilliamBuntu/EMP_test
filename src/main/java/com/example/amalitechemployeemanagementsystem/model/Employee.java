@@ -102,7 +102,7 @@ private  boolean isActive;
 
     @Override
     public String toString() {
-        return String.format("Employee ID: %s | Name: %s | Department: %s | Salary: $%.2f | " +
+        return String.format("Employee ID: %s | Name: %s | Department: %s | Salary: FRW %.2f | " +
                         "Performance: %.1f | Experience: %d years | Active: %s",
                 employeeId, name, department, salary,
                 performanceRating, yearsOfExperience, isActive);

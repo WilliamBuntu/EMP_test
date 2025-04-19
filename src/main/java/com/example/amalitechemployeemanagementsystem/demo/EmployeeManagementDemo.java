@@ -45,7 +45,7 @@ public class EmployeeManagementDemo {
         displayEmployees(database.filterByMinimumRating(4.5));
 
         // Filter by salary range
-        System.out.println("\n--- Employees with salary between $65,000 and $80,000 ---");
+        System.out.println("\n--- Employees with salary between FRW 65,000 and FRW 80,000 ---");
         displayEmployees(database.filterBySalaryRange(65000, 80000));
 
         // Sort by experience (natural ordering)
@@ -67,7 +67,7 @@ public class EmployeeManagementDemo {
         // Calculate average salary by department
         String department = "Finance";
         double avgSalary = database.getAverageSalaryByDepartment(department);
-        System.out.printf("\nAverage salary in %s department: $%.2f\n", department, avgSalary);
+        System.out.printf("\nAverage salary in %s department: FRW %.2f\n", department, avgSalary);
 
         // Give salary raise to high performers
         System.out.println("\n--- Giving 5% raise to employees with rating >= 4.5 ---");
