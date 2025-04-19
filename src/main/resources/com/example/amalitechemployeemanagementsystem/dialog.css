@@ -89,4 +89,22 @@
      -fx-cursor: hand;
 }
 .dialog-pane .button-bar .button:cancel:hover {
-     -fx-background-color: #cccccc;
+     -fx-background-color: #cccccc;}
+
+
+.error-text {
+    -fx-font-size: 11px;
+    -fx-font-style: italic;
+    -fx-fill: #e74c3c;
+    -fx-wrap-text: true;
+}
+
+.text-field:focused {
+    -fx-border-color: #3498db;
+    -fx-border-width: 1px;
+}
+
+.text-field.error {
+    -fx-border-color: #e74c3c;
+    -fx-border-width: 1px;
+}
