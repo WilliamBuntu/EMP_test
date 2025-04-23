@@ -3,7 +3,7 @@ package com.example.amalitechemployeemanagementsystem.model;
 import java.util.Objects;
 
 public class Employee<T> implements Comparable<Employee<T>> {
-private  T employeeId;
+private final T employeeId;
 private String name;
 private String department;
 private double salary;
