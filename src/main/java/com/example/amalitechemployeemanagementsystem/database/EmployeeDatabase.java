@@ -18,31 +18,29 @@ public class EmployeeDatabase <T> {
   // method that Adds a new employee to the database
     // the method returns  true if the employee was added successfully, false if an employee with the same ID already exists
 
-   public boolean addEmployee(Employee<T> employee){
+   public void addEmployee(Employee<T> employee){
       if(employees.containsKey(employee.getemployeeId())){
-          return false;
+          return;
       }
 
       employees.put(employee.getemployeeId(),employee);
 
-      return true;
    }
 
 
    // method to Removes an employee from the database.
     // It returns true if the employee was removed successfully, false if no employee with the given ID exists
-   public boolean removeEmployee(T employeeId){
+   public void removeEmployee(T employeeId){
       if(!employees.containsKey(employeeId)){
-          return false;
+          return;
       }
 
       employees.remove(employeeId);
-      return true;
    }
 
     //Updates an employee's details.
-   public boolean updateEmployeeDetails(T employeeId, String field, Object newValue){
-      if (!employees.containsKey(employeeId)) return false;
+   public void updateEmployeeDetails(T employeeId, String field, Object newValue){
+      if (!employees.containsKey(employeeId)) return;
 
       Employee<T> employee = employees.get(employeeId);
 
@@ -68,13 +66,9 @@ public class EmployeeDatabase <T> {
                   employee.setActive((Boolean) newValue);
                   break;
               default:
-                  return false;
           }
 
-          return true;
-
-      } catch (ClassCastException e) {
-          return false;
+      } catch (ClassCastException _) {
       }
    }
 
