@@ -1,31 +1,62 @@
 package com.example.amalitechemployeemanagementsystem.database;
 
+import com.example.amalitechemployeemanagementsystem.Exception.InvalidDepartmentException;
+import com.example.amalitechemployeemanagementsystem.Exception.InvalidSalaryException;
 import com.example.amalitechemployeemanagementsystem.Utils.EmployeePerformanceComparator;
 import com.example.amalitechemployeemanagementsystem.Utils.EmployeeSalaryComparator;
+import com.example.amalitechemployeemanagementsystem.Utils.EmployeeValidator;
 import com.example.amalitechemployeemanagementsystem.model.Employee;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 public class EmployeeDatabase <T> {
   private final Map<T, Employee<T>> employees;
+    private final Set<String> validDepartments;
+    private static final Logger logger = Logger.getLogger(EmployeeDatabase.class.getName());
 
-  public EmployeeDatabase(){
+
+    public EmployeeDatabase(){
       employees = new HashMap<>();
+      validDepartments = new HashSet<>();
   }
 
   // method that Adds a new employee to the database
     // the method returns  true if the employee was added successfully, false if an employee with the same ID already exists
 
-   public void addEmployee(Employee<T> employee){
-      if(employees.containsKey(employee.getemployeeId())){
-          return;
-      }
+    public void addEmployee(Employee<T> employee) throws InvalidSalaryException, InvalidDepartmentException {
+        try {
+            // Validate employee data
+            EmployeeValidator.validateEmployee(employee, validDepartments);
 
-      employees.put(employee.getemployeeId(),employee);
+            if(employees.containsKey(employee.employeeId())) {
+                logger.warning("Employee with ID " + employee.employeeId() + " already exists. Update skipped.");
+                return;
+            }
 
-   }
+            employees.put(employee.employeeId(), employee);
+            validDepartments.add(employee.getDepartment());
+            logger.info("Employee added successfully: " + employee.getName());
+        } catch (NullPointerException e) {
+            logger.log(Level.SEVERE, "Failed to add employee: Null employee object", e);
+            throw new IllegalArgumentException("Employee cannot be null", e);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Unexpected error while adding employee", e);
+            throw e;
+        }
+    }
+
+
+
+    /**
+     * Validates employee data
+     * @param employee The employee to validate
+     * @throws InvalidSalaryException If the salary is negative
+     * @throws InvalidDepartmentException If the department is empty or invalid
+     */
 
 
    // method to Removes an employee from the database.

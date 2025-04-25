@@ -26,7 +26,7 @@ private  boolean isActive;
 
     // setters And getters
 
-    public T getemployeeId(){
+    public T employeeId(){
         return employeeId;
     }
 
