@@ -1,5 +1,6 @@
 package com.example.amalitechemployeemanagementsystem.demo;
 
+import com.example.amalitechemployeemanagementsystem.Exception.EmployeeNotFoundException;
 import com.example.amalitechemployeemanagementsystem.Exception.InvalidDepartmentException;
 import com.example.amalitechemployeemanagementsystem.Exception.InvalidSalaryException;
 import com.example.amalitechemployeemanagementsystem.database.EmployeeDatabase;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  */
 public class EmployeeManagementDemo {
 
-    public static void main(String[] args) throws InvalidDepartmentException, InvalidSalaryException {
+    public static void main(String[] args) throws InvalidDepartmentException, InvalidSalaryException, EmployeeNotFoundException {
         // Create a new employee database
         EmployeeDatabase<Integer> database = new EmployeeDatabase<>();
 

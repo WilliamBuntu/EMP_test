@@ -11,6 +11,20 @@ import java.util.Comparator;
 public class EmployeeSalaryComparator<T> implements Comparator<Employee<T>> {
     @Override
     public int compare(Employee<T> e1, Employee<T> e2) {
-        return Double.compare(e2.getSalary(), e1.getSalary());
+        // Handle null objects
+        if (e1 == null && e2 == null) return 0;
+        if (e1 == null) return 1; // Null employees go at the end
+        if (e2 == null) return -1;
+
+        // Handle null salary values
+        Double salary1 = e1.getSalary();
+        Double salary2 = e2.getSalary();
+
+        if (salary1 == null && salary2 == null) return 0;
+        if (salary1 == null) return 1; // Null salaries go at the end
+        if (salary2 == null) return -1;
+
+        // Sort by salary in descending order (highest first)
+        return Double.compare(salary2, salary1);
     }
 }

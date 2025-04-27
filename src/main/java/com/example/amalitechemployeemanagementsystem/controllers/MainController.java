@@ -1,4 +1,5 @@
 package com.example.amalitechemployeemanagementsystem.controllers;
+import com.example.amalitechemployeemanagementsystem.Exception.EmployeeNotFoundException;
 import com.example.amalitechemployeemanagementsystem.Exception.InvalidDepartmentException;
 import com.example.amalitechemployeemanagementsystem.Exception.InvalidSalaryException;
 import com.example.amalitechemployeemanagementsystem.database.EmployeeDatabase;
@@ -49,7 +50,7 @@ public class MainController {
      * This method is automatically called after the FXML file has been loaded.
      */
     @FXML
-    private void initialize() {
+    private void initialize() throws InvalidDepartmentException, InvalidSalaryException {
         // Initialize the database and list
         database = new EmployeeDatabase<>();
         employeeList = FXCollections.observableArrayList();
@@ -115,7 +116,7 @@ public class MainController {
      * Removes the selected employee.
      */
     @FXML
-    private void removeSelectedEmployee() {
+    private void removeSelectedEmployee() throws EmployeeNotFoundException {
         Employee<Integer> selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
         if (selectedEmployee != null) {
             database.removeEmployee(selectedEmployee.employeeId());
@@ -171,6 +172,8 @@ public class MainController {
             }
         } catch (IOException e) {
             showAlert("Error", "Could not load dialog: " + e.getMessage());
+        } catch (InvalidDepartmentException | EmployeeNotFoundException | InvalidSalaryException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -189,7 +192,7 @@ public class MainController {
     //Searches employees by department.
 
     @FXML
-    private void searchByDepartment() {
+    private void searchByDepartment() throws InvalidDepartmentException {
         String searchText = searchDeptField.getText().trim();
         if (!searchText.isEmpty()) {
             employeeList.setAll(database.searchByDepartment(searchText));

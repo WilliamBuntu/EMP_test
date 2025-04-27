@@ -58,7 +58,7 @@ public class EmployeeDialogController {
         Button okButton = (Button) rootPane.lookupButton(ButtonType.OK);
         okButton.addEventFilter(javafx.event.ActionEvent.ACTION, event -> {
             if (!validateAllFields()) {
-                // Prevent dialog from closing if validation fails
+                // Prevent the dialog from closing if validation fails
                 event.consume();
             }
         });
@@ -124,6 +124,14 @@ public class EmployeeDialogController {
             updateFieldStyle(departmentField, true);
             return false;
         }
+
+        if (!department.matches("[a-zA-Z]+")) {
+            departmentError.setText("Department must contain only letters");
+            departmentError.setVisible(true);
+            updateFieldStyle(departmentField, true);
+            return false;
+        }
+
         departmentError.setVisible(false);
         updateFieldStyle(departmentField, false);
         return true;
