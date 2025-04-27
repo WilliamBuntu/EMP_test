@@ -1,4 +1,7 @@
 package com.example.amalitechemployeemanagementsystem.controllers;
+import com.example.amalitechemployeemanagementsystem.Exception.EmployeeNotFoundException;
+import com.example.amalitechemployeemanagementsystem.Exception.InvalidDepartmentException;
+import com.example.amalitechemployeemanagementsystem.Exception.InvalidSalaryException;
 import com.example.amalitechemployeemanagementsystem.database.EmployeeDatabase;
 import com.example.amalitechemployeemanagementsystem.model.Employee;
 import javafx.collections.FXCollections;
@@ -47,7 +50,7 @@ public class MainController {
      * This method is automatically called after the FXML file has been loaded.
      */
     @FXML
-    private void initialize() {
+    private void initialize() throws InvalidDepartmentException, InvalidSalaryException {
         // Initialize the database and list
         database = new EmployeeDatabase<>();
         employeeList = FXCollections.observableArrayList();
@@ -57,7 +60,7 @@ public class MainController {
         sortComboBox.getItems().addAll("By Experience", "By Salary", "By Performance");
         sortComboBox.setValue("By Experience");
 
-        idColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getemployeeId()));
+        idColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().employeeId()));
         nameColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getName()));
         deptColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getDepartment()));
         salaryColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getSalary()));
@@ -104,6 +107,8 @@ public class MainController {
             }
         } catch (IOException e) {
             showAlert("Error", "Could not load dialog: " + e.getMessage());
+        } catch (InvalidSalaryException | InvalidDepartmentException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -111,10 +116,10 @@ public class MainController {
      * Removes the selected employee.
      */
     @FXML
-    private void removeSelectedEmployee() {
+    private void removeSelectedEmployee() throws EmployeeNotFoundException {
         Employee<Integer> selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
         if (selectedEmployee != null) {
-            database.removeEmployee(selectedEmployee.getemployeeId());
+            database.removeEmployee(selectedEmployee.employeeId());
             updateEmployeeList();
         } else {
             showAlert("No Selection", "Please select an employee to remove.");
@@ -151,10 +156,10 @@ public class MainController {
             // Show the dialog and process the result
             Optional<ButtonType> result = dialog.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                Employee<Integer> updatedEmployee = controller.getEmployee(selectedEmployee.getemployeeId());
+                Employee<Integer> updatedEmployee = controller.getEmployee(selectedEmployee.employeeId());
                 if (updatedEmployee != null) {
                     // Update all fields
-                    Integer id = selectedEmployee.getemployeeId();
+                    Integer id = selectedEmployee.employeeId();
                     database.updateEmployeeDetails(id, "name", updatedEmployee.getName());
                     database.updateEmployeeDetails(id, "department", updatedEmployee.getDepartment());
                     database.updateEmployeeDetails(id, "salary", updatedEmployee.getSalary());
@@ -167,6 +172,8 @@ public class MainController {
             }
         } catch (IOException e) {
             showAlert("Error", "Could not load dialog: " + e.getMessage());
+        } catch (InvalidDepartmentException | EmployeeNotFoundException | InvalidSalaryException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -185,7 +192,7 @@ public class MainController {
     //Searches employees by department.
 
     @FXML
-    private void searchByDepartment() {
+    private void searchByDepartment() throws InvalidDepartmentException {
         String searchText = searchDeptField.getText().trim();
         if (!searchText.isEmpty()) {
             employeeList.setAll(database.searchByDepartment(searchText));
@@ -239,7 +246,7 @@ public class MainController {
 
     //Manually adds some sample data to the database.
 
-    private void addSampleData() {
+    private void addSampleData() throws InvalidDepartmentException, InvalidSalaryException {
         database.addEmployee(new Employee<>(nextEmployeeId++, "John Doe", "IT", 75000, 4.5, 7, true));
         database.addEmployee(new Employee<>(nextEmployeeId++, "Jane Smith", "HR", 65000, 4.8, 5, true));
         database.addEmployee(new Employee<>(nextEmployeeId++, "Bob Johnson", "Finance", 85000, 4.2, 10, true));

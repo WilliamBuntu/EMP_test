@@ -1,12 +1,14 @@
 package com.example.amalitechemployeemanagementsystem.demo;
 
+import com.example.amalitechemployeemanagementsystem.Exception.EmployeeNotFoundException;
+import com.example.amalitechemployeemanagementsystem.Exception.InvalidDepartmentException;
+import com.example.amalitechemployeemanagementsystem.Exception.InvalidSalaryException;
 import com.example.amalitechemployeemanagementsystem.database.EmployeeDatabase;
 import com.example.amalitechemployeemanagementsystem.model.Employee;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.Formatter;
 import java.util.ArrayList;
 
 /*
@@ -14,7 +16,7 @@ import java.util.ArrayList;
  */
 public class EmployeeManagementDemo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidDepartmentException, InvalidSalaryException, EmployeeNotFoundException {
         // Create a new employee database
         EmployeeDatabase<Integer> database = new EmployeeDatabase<>();
 
@@ -122,7 +124,7 @@ public class EmployeeManagementDemo {
         // Print each employee in a row
         for (Employee<T> employee : employees) {
             System.out.printf("%-5s %-20s %-15s %-10.2f %-10.1f %-10d %-10s\n",
-                              employee.getemployeeId(),
+                              employee.employeeId(),
                               employee.getName(),
                               employee.getDepartment(),
                               employee.getSalary(),

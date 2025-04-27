@@ -22,7 +22,7 @@ class EmployeeTest {
 
     @Test
     void employeeId() {
-        assertEquals(1, employee.getemployeeId());
+        assertEquals(1, employee.employeeId());
     }
 
     @Test
